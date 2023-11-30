@@ -14,5 +14,5 @@ func main() {
 	cli := New(handler)
 
 	cli.ShowMenu()
-	handler.SalesRecap(db, "2023-11-28", "2023-11-30") // input date nanti pake menu cli
+	// handler.SalesRecap(db, "2023-11-28", "2023-11-30") // input date nanti pake menu cli
 }
