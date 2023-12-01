@@ -3,10 +3,16 @@ package handler
 import (
 	"database/sql"
 	"errors"
+	"fmt"
 	"pair-project/entity"
 )
 
-func (h *Handler) UpdateProduct(product *entity.Products) (*entity.Products, error) {
+var (
+	ErrNotFoundRecord         = fmt.Errorf("error record not found")
+	ErrMultipleRecordAffected = fmt.Errorf("error multiple record affected")
+)
+
+func UpdateProduct(db *sql.DB, product *entity.Products) (*entity.Products, error) {
 	query := `
 		UPDATE products
 		SET 
@@ -18,7 +24,7 @@ func (h *Handler) UpdateProduct(product *entity.Products) (*entity.Products, err
 		LIMIT 1
 	`
 
-	result, err := h.conn.Exec(query, product.Name, product.Price, product.Stock, product.Product_id)
+	result, err := db.Exec(query, product.Name, product.Price, product.Stock, product.Product_id)
 	if err != nil {
 		switch {
 		case errors.Is(err, sql.ErrNoRows):

@@ -1,11 +1,12 @@
 package handler
 
 import (
+	"database/sql"
 	"errors"
 	"pair-project/entity"
 )
 
-func (h *Handler) GetProductByName(productName string) (*entity.Products, error) {
+func GetProductByName(db *sql.DB, productName string) (*entity.Products, error) {
 	query := `
 		SELECT product_id, name, price, stock
 		WHERE name = ?
@@ -13,7 +14,7 @@ func (h *Handler) GetProductByName(productName string) (*entity.Products, error)
 	`
 
 	var product entity.Products
-	err := h.conn.QueryRow(query, productName).Scan(
+	err := db.QueryRow(query, productName).Scan(
 		&product.Product_id,
 		&product.Name,
 		&product.Price,

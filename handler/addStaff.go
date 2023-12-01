@@ -1,14 +1,17 @@
 package handler
 
-import "pair-project/entity"
+import (
+	"database/sql"
+	"pair-project/entity"
+)
 
-func (h *Handler) AddStaff(newStaff *entity.Staff) (*entity.Staff, error) {
+func AddStaff(db *sql.DB, newStaff *entity.Staff) (*entity.Staff, error) {
 	query := `
 		INSERT INTO staff (name, email, position)
 		VALUES (?, ?, ?)
 	`
 
-	result, err := h.conn.Exec(query, newStaff.Name, newStaff.Email, newStaff.Position)
+	result, err := db.Exec(query, newStaff.Name, newStaff.Email, newStaff.Position)
 	if err != nil {
 		return nil, err
 	}

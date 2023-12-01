@@ -7,7 +7,7 @@ import (
 	"pair-project/entity"
 )
 
-func (h *Handler) SalesRecap(db *sql.DB, date1 string, date2 string) error {
+func SalesRecap(db *sql.DB, date1 string, date2 string) error {
 	fmt.Printf("\nGetting sales from %s to %s.\n", date1, date2)
 
 	// sql query for recap
