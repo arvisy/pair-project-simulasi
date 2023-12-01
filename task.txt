@@ -1,0 +1,20 @@
+Fitur Aplikasi:
+Tambah Produk
+Ubah Stok Produk
+Tambah Staff
+Rekap Penjualan
+Exit
+
+arvi:
+tambah produk
+
+kiet:
+rekap Penjualan
+Exit
+
+odhi:
+ubah stok produk
+tambah staf
+
+github:
+https://github.com/arvisy/pair-project
