@@ -20,11 +20,6 @@ func main() {
 	defer db.Close()
 
 	for {
-		cli.ShowMenu()
-
-	}
-
-	for {
 		exit, returnToMenu := menu(db)
 		if exit {
 			break
@@ -46,14 +41,13 @@ func menu(db *sql.DB) (bool, bool) {
 			break
 		}
 
-		fmt.Print("Pilih menu: ")
+		cli.ShowMenu()
 
 		scanner := bufio.NewScanner(os.Stdin)
 		for scanner.Scan() {
 			input, err := strconv.Atoi(scanner.Text())
 			if err != nil {
 				fmt.Println("Choice unrecognized. Please select one of the options")
-				fmt.Print("Pilih menu: ")
 				continue
 			}
 
