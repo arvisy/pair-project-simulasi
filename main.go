@@ -1,6 +1,7 @@
 package main
 
 import (
+	"pair-project/cli"
 	"pair-project/config"
 	"pair-project/handler"
 )
@@ -11,7 +12,7 @@ func main() {
 	// 	// error
 	// }
 	handler := handler.New(db)
-	cli := New(handler)
+	cli := cli.New(handler)
 
 	cli.ShowMenu()
 	// handler.SalesRecap(db, "2023-11-28", "2023-11-30") // input date nanti pake menu cli

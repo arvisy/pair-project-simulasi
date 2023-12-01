@@ -1,4 +1,4 @@
-package main
+package cli
 
 import (
 	"fmt"
@@ -22,3 +22,5 @@ func (cli *CLI) ShowMenu() {
 	fmt.Println("3 -> Tambah staf")
 	fmt.Println("4 -> Exit")
 }
+
+// func (cli *CLI) UpdateProduct(name string, stock string, )
