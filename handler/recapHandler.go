@@ -53,6 +53,7 @@ func SalesRecap(db *sql.DB, date1 string, date2 string) error {
 	for _, s := range sales {
 		fmt.Printf("%d | %s | %d | %s\n", s.Sale_id, s.Product_name, s.Quantity, s.Sale_date)
 	}
+	fmt.Println("")
 
 	return nil
 }
