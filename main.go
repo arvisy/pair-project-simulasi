@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	db, err := config.GetDB()
+	db, err := config.GetDB("root:@tcp(127.0.0.1:3306)/pair_project")
 	if err != nil {
 		log.Fatal("Failed to connect")
 	}
@@ -57,22 +57,23 @@ func menu(db *sql.DB) (bool, bool) {
 
 		switch choice {
 		case 1:
-			handler.AddProduct(db)
+			// handler.AddProduct(db)
 			fmt.Println("Press ENTER to return to the main menu...")
 			exit = false
 			returnToMenu = true
 		case 2:
-			handler.AddStaff(db)
+			// handler.AddStaff(db)
 			fmt.Println("Press ENTER to return to the main menu...")
 			exit = false
 			returnToMenu = true
 		case 3:
-			handler.UpdateProduct(db)
+			// handler.UpdateProduct(db)
 			fmt.Println("Press ENTER to return to the main menu...")
 			exit = false
 			returnToMenu = true
 		case 4:
-			handler.SalesRecap(db)
+			date1, date2 := cli.RecapMenu()
+			handler.SalesRecap(db, date1, date2)
 			fmt.Println("Press ENTER to return to the main menu...")
 			exit = false
 			returnToMenu = true
