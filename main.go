@@ -47,7 +47,8 @@ func main() {
 			newstaff := cli.AddStaff()
 			handler.AddStaff(db, newstaff)
 		case 3:
-			// handler.UpdateProduct(db)
+			oldproductName, updatedProduct := cli.UpdateProduct()
+			handler.UpdateProduct(db, oldproductName, &updatedProduct)
 		case 4:
 			date1, date2 := cli.RecapMenu()
 			handler.SalesRecap(db, date1, date2)

@@ -56,4 +56,34 @@ func AddStaff() entity.AddStaffInput {
 	return result
 }
 
-// func (cli *CLI) UpdateProduct(name string, stock string, )
+func UpdateProduct() (string, entity.UpdateProductInput) {
+	var result entity.UpdateProductInput
+	var oldproductName string
+	fmt.Println("Update Product")
+
+	fmt.Print("Which product do you want to update? ")
+	_, err := fmt.Scan(&oldproductName)
+	if err != nil {
+		fmt.Println("Invalid input. Please try again")
+	}
+
+	fmt.Print("New product name: ")
+	_, err = fmt.Scan(&result.Name)
+	if err != nil {
+		fmt.Println("Invalid input. Please try again")
+	}
+
+	fmt.Print("New product price: ")
+	_, err = fmt.Scan(&result.Price)
+	if err != nil {
+		fmt.Println("Invalid input. Please try again")
+	}
+
+	fmt.Print("New product stock: ")
+	_, err = fmt.Scan(&result.Stock)
+	if err != nil {
+		fmt.Println("Invalid input. Please try again")
+	}
+
+	return oldproductName, result
+}
