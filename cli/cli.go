@@ -8,8 +8,8 @@ import (
 func ShowMenu() {
 	fmt.Println("Fitur Aplikasi: type (1 - 4)")
 	fmt.Println("1 -> Tambah Produk")
-	fmt.Println("2 -> Ubah Stok Produk")
-	fmt.Println("3 -> Tambah staf")
+	fmt.Println("2 -> Tambah staf")
+	fmt.Println("3 -> Ubah Stok Produk")
 	fmt.Println("4 -> Lihat rekap penjualan")
 	fmt.Println("5 -> Exit")
 }

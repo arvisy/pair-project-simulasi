@@ -2,22 +2,31 @@ package handler
 
 import (
 	"database/sql"
+	"fmt"
+	"log"
 	"pair-project/entity"
 )
 
-func AddStaff(db *sql.DB, input entity.AddStaffInput) (entity.Staff, error) {
+func AddStaff(db *sql.DB, input entity.AddStaffInput) error {
 	query :=
 		`INSERT INTO staff (name, email, position)
         VALUES (?, ?, ?)`
 
-	result, err := db.Exec(query, input.Name, input.Email, input.Position)
+	stmt, err := db.Prepare(query)
 	if err != nil {
-		return entity.Staff{}, err
+		log.Println("error preparing sql statement:", err)
+		return err
+	}
+
+	result, err := stmt.Exec(input.Name, input.Email, input.Position)
+	if err != nil {
+		return err
 	}
 
 	id, err := result.LastInsertId()
 	if err != nil {
-		return entity.Staff{}, err
+		log.Println("error getting :", err)
+		return err
 	}
 
 	newStaff := entity.Staff{
@@ -27,5 +36,11 @@ func AddStaff(db *sql.DB, input entity.AddStaffInput) (entity.Staff, error) {
 		Position: input.Position,
 	}
 
-	return newStaff, nil
+	fmt.Printf("\nStaffID | Name | Email | Position\n")
+	fmt.Println("----------------------------------------------")
+
+	fmt.Printf("%v | %v | %v | %v\n", newStaff.StaffID, newStaff.Name, newStaff.Email, newStaff.Position)
+	fmt.Println("")
+
+	return nil
 }
