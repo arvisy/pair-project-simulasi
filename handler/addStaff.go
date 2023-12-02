@@ -5,22 +5,27 @@ import (
 	"pair-project/entity"
 )
 
-func AddStaff(db *sql.DB, newStaff *entity.Staff) (*entity.Staff, error) {
-	query := `
-		INSERT INTO staff (name, email, position)
-		VALUES (?, ?, ?)
-	`
+func AddStaff(db *sql.DB, input entity.AddStaffInput) (entity.Staff, error) {
+	query :=
+		`INSERT INTO staff (name, email, position)
+        VALUES (?, ?, ?)`
 
-	result, err := db.Exec(query, newStaff.Name, newStaff.Email, newStaff.Position)
+	result, err := db.Exec(query, input.Name, input.Email, input.Position)
 	if err != nil {
-		return nil, err
+		return entity.Staff{}, err
 	}
 
 	id, err := result.LastInsertId()
 	if err != nil {
-		return nil, err
+		return entity.Staff{}, err
 	}
 
-	newStaff.StaffID = id
+	newStaff := entity.Staff{
+		StaffID:  id,
+		Name:     input.Name,
+		Email:    input.Email,
+		Position: input.Position,
+	}
+
 	return newStaff, nil
 }

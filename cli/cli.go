@@ -2,6 +2,7 @@ package cli
 
 import (
 	"fmt"
+	"pair-project/entity"
 )
 
 func ShowMenu() {
@@ -28,6 +29,31 @@ func RecapMenu() (string, string) {
 	}
 
 	return date1, date2
+}
+
+func AddStaff() entity.AddStaffInput {
+	var result entity.AddStaffInput
+	fmt.Println("Add staff")
+
+	fmt.Print("Staff name: ")
+	_, err := fmt.Scan(&result.Name)
+	if err != nil {
+		fmt.Println("Invalid input. Please try again")
+	}
+
+	fmt.Print("Staff email: ")
+	_, err = fmt.Scan(&result.Email)
+	if err != nil {
+		fmt.Println("Invalid input. Please try again")
+	}
+
+	fmt.Print("Staff position: ")
+	_, err = fmt.Scan(&result.Position)
+	if err != nil {
+		fmt.Println("Invalid input. Please try again")
+	}
+
+	return result
 }
 
 // func (cli *CLI) UpdateProduct(name string, stock string, )

@@ -44,7 +44,8 @@ func main() {
 		case 1:
 			// handler.AddProduct(db)
 		case 2:
-			// handler.AddStaff(db)
+			newstaff := cli.AddStaff()
+			handler.AddStaff(db, newstaff)
 		case 3:
 			// handler.UpdateProduct(db)
 		case 4:
