@@ -45,14 +45,29 @@ func main() {
 
 		switch choice {
 		case 1:
-			productList, err := handler.ListProduct(db)
-			if err != nil {
-				fmt.Println("Error listing products:", err)
-				return
+			innerExit := false
+			for !innerExit {
+				cli.ShowMenuProduct()
+				var choiceProduct int
+				choiceProduct = cli.GetChoiceProduct()
+				switch choiceProduct {
+				case 1:
+					productList, err := handler.ListProduct(db)
+					if err != nil {
+						fmt.Println("Error listing products:", err)
+						return
+					}
+					cli.DisplayProductList(productList)
+				case 2:
+					newProduct := cli.AddProduct()
+					handler.AddProduct(db, newProduct)
+				case 3:
+					innerExit = true
+				default:
+					fmt.Println("Choice unrecognized. Please select one of the options")
+					break
+				}
 			}
-			cli.DisplayProductList(productList)
-			newProduct := cli.AddProduct()
-			handler.AddProduct(db, newProduct)
 		case 2:
 			newstaff := cli.AddStaff()
 			handler.AddStaff(db, newstaff)

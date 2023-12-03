@@ -16,6 +16,19 @@ func ShowMenu() {
 	fmt.Println("5 -> Exit")
 }
 
+func ShowMenuProduct() {
+	fmt.Println("1 -> List Produk")
+	fmt.Println("2 -> Tambah Produk")
+	fmt.Println("3 -> Back to Menu\n")
+}
+
+func GetChoiceProduct() int {
+	var choiceProduct int
+	fmt.Print("Enter choice for product: ")
+	fmt.Scan(&choiceProduct)
+	return choiceProduct
+}
+
 func RecapMenu() (string, string) {
 	var date1, date2 string
 	fmt.Println("Insert date range (YYYY-MM-DD)")
