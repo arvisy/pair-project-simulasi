@@ -62,6 +62,9 @@ func main() {
 					newProduct := cli.AddProduct()
 					handler.AddProduct(db, newProduct)
 				case 3:
+					oldproductName, updatedProduct := cli.UpdateProduct()
+					handler.UpdateProduct(db, oldproductName, &updatedProduct)
+				case 4:
 					innerExit = true
 				default:
 					fmt.Println("Choice unrecognized. Please select one of the options")
@@ -69,15 +72,41 @@ func main() {
 				}
 			}
 		case 2:
-			newstaff := cli.AddStaff()
-			handler.AddStaff(db, newstaff)
+			innerExit := false
+			for !innerExit {
+				cli.ShowMenuStaf()
+				var choiceProduct int
+				choiceProduct = cli.GetChoiceProduct()
+				switch choiceProduct {
+				case 1:
+					newstaff := cli.AddStaff()
+					handler.AddStaff(db, newstaff)
+				case 2:
+					innerExit = true
+				default:
+					fmt.Println("Choice unrecognized. Please select one of the options")
+					break
+				}
+			}
 		case 3:
-			oldproductName, updatedProduct := cli.UpdateProduct()
-			handler.UpdateProduct(db, oldproductName, &updatedProduct)
+			innerExit := false
+			for !innerExit {
+				cli.ShowMenuSales()
+				var choiceProduct int
+				choiceProduct = cli.GetChoiceProduct()
+				switch choiceProduct {
+				case 1:
+					date1, date2 := cli.RecapMenu()
+					handler.SalesRecap(db, date1, date2)
+				case 2:
+					innerExit = true
+				default:
+					fmt.Println("Choice unrecognized. Please select one of the options")
+					break
+				}
+			}
+
 		case 4:
-			date1, date2 := cli.RecapMenu()
-			handler.SalesRecap(db, date1, date2)
-		case 5:
 			fmt.Println("Thank you!")
 			exit = true
 		default:

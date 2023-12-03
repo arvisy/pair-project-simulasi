@@ -9,17 +9,27 @@ import (
 
 func ShowMenu() {
 	fmt.Println("Fitur Aplikasi: type (1 - 4)")
-	fmt.Println("1 -> Tambah Produk")
-	fmt.Println("2 -> Tambah staf")
-	fmt.Println("3 -> Ubah Stok Produk")
-	fmt.Println("4 -> Lihat rekap penjualan")
-	fmt.Println("5 -> Exit")
+	fmt.Println("1 -> Produk")
+	fmt.Println("2 -> Staf")
+	fmt.Println("3 -> Sales")
+	fmt.Println("4 -> Exit")
 }
 
 func ShowMenuProduct() {
 	fmt.Println("1 -> List Produk")
 	fmt.Println("2 -> Tambah Produk")
-	fmt.Println("3 -> Back to Menu\n")
+	fmt.Println("3 -> Ubah Stok Product")
+	fmt.Println("4 -> Back to Menu\n")
+}
+
+func ShowMenuStaf() {
+	fmt.Println("1 -> Tambah Staf")
+	fmt.Println("2 -> Back to Main Menu\n")
+}
+
+func ShowMenuSales() {
+	fmt.Println("1 -> Rekap Penjualan")
+	fmt.Println("2 -> Back to Main Menu\n")
 }
 
 func GetChoiceProduct() int {
