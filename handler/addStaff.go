@@ -7,7 +7,7 @@ import (
 	"pair-project/entity"
 )
 
-func AddStaff(db *sql.DB, input entity.AddStaffInput) error {
+func AddStaff(db *sql.DB, input entity.Staff) error {
 	query :=
 		`INSERT INTO staff (name, email, position)
         VALUES (?, ?, ?)`
@@ -29,18 +29,7 @@ func AddStaff(db *sql.DB, input entity.AddStaffInput) error {
 		return err
 	}
 
-	newStaff := entity.Staff{
-		StaffID:  id,
-		Name:     input.Name,
-		Email:    input.Email,
-		Position: input.Position,
-	}
-
-	fmt.Printf("\nStaffID | Name | Email | Position\n")
-	fmt.Println("----------------------------------------------")
-
-	fmt.Printf("%v | %v | %v | %v\n", newStaff.StaffID, newStaff.Name, newStaff.Email, newStaff.Position)
-	fmt.Println("")
+	fmt.Println("Product added successfully with id: ", id)
 
 	return nil
 }

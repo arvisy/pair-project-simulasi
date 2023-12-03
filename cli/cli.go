@@ -3,6 +3,7 @@ package cli
 import (
 	"fmt"
 	"pair-project/entity"
+	"regexp"
 	"strconv"
 	"strings"
 )
@@ -70,27 +71,13 @@ func RecapMenu() (string, string) {
 	return date1, date2
 }
 
-func AddStaff() entity.AddStaffInput {
-	var result entity.AddStaffInput
+func AddStaff() entity.Staff {
+	var result entity.Staff
 	fmt.Println("Add staff")
 
-	fmt.Print("Staff name: ")
-	_, err := fmt.Scan(&result.Name)
-	if err != nil {
-		fmt.Println("Invalid input. Please try again")
-	}
-
-	fmt.Print("Staff email: ")
-	_, err = fmt.Scan(&result.Email)
-	if err != nil {
-		fmt.Println("Invalid input. Please try again")
-	}
-
-	fmt.Print("Staff position: ")
-	_, err = fmt.Scan(&result.Position)
-	if err != nil {
-		fmt.Println("Invalid input. Please try again")
-	}
+	result.Name = getValidInput("Staff name: ")
+	result.Email = getValidEmail("Staff email: ")
+	result.Position = getValidInput("Staff position: ")
 
 	return result
 }
@@ -100,29 +87,10 @@ func UpdateProduct() (string, entity.UpdateProductInput) {
 	var oldproductName string
 	fmt.Println("Update Product")
 
-	fmt.Print("Which product do you want to update? ")
-	_, err := fmt.Scan(&oldproductName)
-	if err != nil {
-		fmt.Println("Invalid input. Please try again")
-	}
-
-	fmt.Print("New product name: ")
-	_, err = fmt.Scan(&result.Name)
-	if err != nil {
-		fmt.Println("Invalid input. Please try again")
-	}
-
-	fmt.Print("New product price: ")
-	_, err = fmt.Scan(&result.Price)
-	if err != nil {
-		fmt.Println("Invalid input. Please try again")
-	}
-
-	fmt.Print("New product stock: ")
-	_, err = fmt.Scan(&result.Stock)
-	if err != nil {
-		fmt.Println("Invalid input. Please try again")
-	}
+	oldproductName = getValidInput("Which product do you want to update? ")
+	result.Name = getValidInput("New product name: ")
+	result.Price = getValidFloatInput("New product price: ")
+	result.Stock = getValidIntInput("New product stock: ")
 
 	return oldproductName, result
 }
@@ -143,6 +111,35 @@ func getInput(prompt string) (string, error) {
 	fmt.Print(prompt)
 	_, err := fmt.Scan(&input)
 	return input, err
+}
+
+func getValidEmail(prompt string) string {
+	var input string
+
+	var (
+		emailRX = regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+	)
+
+	for {
+		result, err := getInput(prompt)
+		if err != nil {
+			fmt.Println("Invalid input. Please try again.")
+			continue
+		}
+
+		if !emailRX.MatchString(result) {
+			fmt.Println("invalid input. must be valid email")
+			continue
+		}
+
+		if strings.TrimSpace(result) != "" {
+			input = result
+			break
+		} else {
+			fmt.Println("Input cannot be empty. Please try again.")
+		}
+	}
+	return input
 }
 
 func getValidInput(prompt string) string {
