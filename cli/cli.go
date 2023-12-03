@@ -3,6 +3,8 @@ package cli
 import (
 	"fmt"
 	"pair-project/entity"
+	"strconv"
+	"strings"
 )
 
 func ShowMenu() {
@@ -86,4 +88,79 @@ func UpdateProduct() (string, entity.UpdateProductInput) {
 	}
 
 	return oldproductName, result
+}
+
+func AddProduct() entity.Products {
+	var result entity.Products
+	fmt.Println("Add product")
+
+	result.Name = getValidInput("Product name: ")
+	result.Price = getValidFloatInput("Price: ")
+	result.Stock = getValidIntInput("Stock: ")
+
+	return result
+}
+
+func getInput(prompt string) (string, error) {
+	var input string
+	fmt.Print(prompt)
+	_, err := fmt.Scan(&input)
+	return input, err
+}
+
+func getValidInput(prompt string) string {
+	var input string
+	for {
+		result, err := getInput(prompt)
+		if err != nil {
+			fmt.Println("Invalid input. Please try again.")
+			continue
+		}
+
+		if strings.TrimSpace(result) != "" {
+			input = result
+			break
+		} else {
+			fmt.Println("Input cannot be empty. Please try again.")
+		}
+	}
+	return input
+}
+
+func getValidFloatInput(prompt string) float64 {
+	var result float64
+	for {
+		priceInput, err := getInput(prompt)
+		if err != nil {
+			fmt.Println("Invalid input. Please try again.")
+			continue
+		}
+
+		result, err = strconv.ParseFloat(priceInput, 64)
+		if err == nil {
+			break
+		}
+
+		fmt.Println("Invalid input. Please enter a valid number.")
+	}
+	return result
+}
+
+func getValidIntInput(prompt string) int {
+	var result int
+	for {
+		stockInput, err := getInput(prompt)
+		if err != nil {
+			fmt.Println("Invalid input. Please try again.")
+			continue
+		}
+
+		result, err = strconv.Atoi(stockInput)
+		if err == nil {
+			break
+		}
+
+		fmt.Println("Invalid input. Please enter a valid number.")
+	}
+	return result
 }

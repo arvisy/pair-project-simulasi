@@ -42,7 +42,8 @@ func main() {
 
 		switch choice {
 		case 1:
-			// handler.AddProduct(db)
+			newProduct := cli.AddProduct()
+			handler.AddProduct(db, newProduct)
 		case 2:
 			newstaff := cli.AddStaff()
 			handler.AddStaff(db, newstaff)
