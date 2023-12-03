@@ -76,7 +76,7 @@ func main() {
 			for !innerExit {
 				cli.ShowMenuStaf()
 				var choiceProduct int
-				choiceProduct = cli.GetChoiceProduct()
+				choiceProduct = cli.GetChoiceStaf()
 				switch choiceProduct {
 				case 1:
 					newstaff := cli.AddStaff()
@@ -93,7 +93,7 @@ func main() {
 			for !innerExit {
 				cli.ShowMenuSales()
 				var choiceProduct int
-				choiceProduct = cli.GetChoiceProduct()
+				choiceProduct = cli.GetChoiceSales()
 				switch choiceProduct {
 				case 1:
 					date1, date2 := cli.RecapMenu()

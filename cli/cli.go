@@ -39,6 +39,20 @@ func GetChoiceProduct() int {
 	return choiceProduct
 }
 
+func GetChoiceStaf() int {
+	var choiceProduct int
+	fmt.Print("Enter choice for staf: ")
+	fmt.Scan(&choiceProduct)
+	return choiceProduct
+}
+
+func GetChoiceSales() int {
+	var choiceProduct int
+	fmt.Print("Enter choice for sales: ")
+	fmt.Scan(&choiceProduct)
+	return choiceProduct
+}
+
 func RecapMenu() (string, string) {
 	var date1, date2 string
 	fmt.Println("Insert date range (YYYY-MM-DD)")
