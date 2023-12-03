@@ -62,8 +62,8 @@ func main() {
 					newProduct := cli.AddProduct()
 					handler.AddProduct(db, newProduct)
 				case 3:
-					oldproductName, updatedProduct := cli.UpdateProduct()
-					handler.UpdateProduct(db, oldproductName, &updatedProduct)
+					updatedProduct := cli.UpdateProduct(db)
+					handler.UpdateProduct(db, &updatedProduct)
 				case 4:
 					innerExit = true
 				default:

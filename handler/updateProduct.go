@@ -13,20 +13,7 @@ var (
 	ErrMultipleRecordAffected = fmt.Errorf("error multiple record affected")
 )
 
-func UpdateProduct(db *sql.DB, oldproductName string, inputUpdatedProduct *entity.Products) error {
-	productID, err := GetProductIDByName(db, oldproductName)
-	if err != nil {
-		fmt.Println(err)
-		return err
-	}
-
-	updatedProduct := entity.Products{
-		Product_id: productID,
-		Name:       inputUpdatedProduct.Name,
-		Price:      inputUpdatedProduct.Price,
-		Stock:      inputUpdatedProduct.Stock,
-	}
-
+func UpdateProduct(db *sql.DB, inputUpdatedProduct *entity.Products) error {
 	query := `
 		UPDATE products
 		SET 
@@ -44,7 +31,7 @@ func UpdateProduct(db *sql.DB, oldproductName string, inputUpdatedProduct *entit
 		return err
 	}
 
-	result, err := stmt.Exec(updatedProduct.Name, updatedProduct.Price, updatedProduct.Stock, updatedProduct.Product_id)
+	result, err := stmt.Exec(inputUpdatedProduct.Name, inputUpdatedProduct.Price, inputUpdatedProduct.Stock, inputUpdatedProduct.Product_id)
 	if err != nil {
 		switch {
 		case errors.Is(err, sql.ErrNoRows):

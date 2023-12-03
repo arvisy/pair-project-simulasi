@@ -1,8 +1,11 @@
 package cli
 
 import (
+	"database/sql"
+	"errors"
 	"fmt"
 	"pair-project/entity"
+	"pair-project/handler"
 	"regexp"
 	"strconv"
 	"strings"
@@ -83,17 +86,16 @@ func AddStaff() entity.Staff {
 	return result
 }
 
-func UpdateProduct() (string, entity.Products) {
+func UpdateProduct(db *sql.DB) entity.Products {
 	var result entity.Products
-	var oldproductName string
 	fmt.Println("\nUpdate Product")
 
-	oldproductName = getValidInput("Which product name do you want to update? ")
+	result.Product_id = getValidProductName(db, "Which product name do you want to update? ")
 	result.Name = getValidInput("New product name: ")
 	result.Price = getValidFloatInput("New product price: ")
 	result.Stock = getValidIntInput("New product stock: ")
 
-	return oldproductName, result
+	return result
 }
 
 func AddProduct() entity.Products {
@@ -198,6 +200,28 @@ func getValidIntInput(prompt string) int {
 		fmt.Println("Invalid input. Please enter a valid number.")
 	}
 	return result
+}
+
+func getValidProductName(db *sql.DB, prompt string) int {
+	var id int
+	var err error
+	for {
+		oldproductName := getValidInput(prompt)
+
+		id, err = handler.GetProductIDByName(db, oldproductName)
+		if err != nil {
+			switch {
+			case errors.Is(err, handler.ErrNotFoundRecord):
+				fmt.Println("No record match for this name")
+			default:
+				fmt.Println(err)
+			}
+			continue
+		}
+		break
+	}
+
+	return id
 }
 
 func DisplayProductList(products []entity.Products) {
