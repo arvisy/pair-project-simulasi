@@ -13,7 +13,7 @@ var (
 	ErrMultipleRecordAffected = fmt.Errorf("error multiple record affected")
 )
 
-func UpdateProduct(db *sql.DB, oldproductName string, inputUpdatedProduct *entity.UpdateProductInput) error {
+func UpdateProduct(db *sql.DB, oldproductName string, inputUpdatedProduct *entity.Products) error {
 	productID, err := GetProductIDByName(db, oldproductName)
 	if err != nil {
 		fmt.Println(err)
@@ -66,10 +66,8 @@ func UpdateProduct(db *sql.DB, oldproductName string, inputUpdatedProduct *entit
 		return err
 	}
 
-	fmt.Printf("\nProductID | ProductName | ProductPrice | ProductStock |\n")
-	fmt.Println("----------------------------------------------")
-	fmt.Printf("%v | %v | %v | %v\n", updatedProduct.Product_id, updatedProduct.Name, updatedProduct.Price, updatedProduct.Stock)
-	fmt.Println("")
+	fmt.Println("\nProduct updated successfully")
+	fmt.Println()
 
 	return nil
 }

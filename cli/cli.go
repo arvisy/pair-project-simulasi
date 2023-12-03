@@ -24,8 +24,9 @@ func ShowMenuProduct() {
 }
 
 func ShowMenuStaf() {
-	fmt.Println("1 -> Tambah Staf")
-	fmt.Println("2 -> Back to Main Menu\n")
+	fmt.Println("1 -> List Staff")
+	fmt.Println("2 -> Tambah Staf")
+	fmt.Println("3 -> Back to Main Menu\n")
 }
 
 func ShowMenuSales() {
@@ -82,12 +83,12 @@ func AddStaff() entity.Staff {
 	return result
 }
 
-func UpdateProduct() (string, entity.UpdateProductInput) {
-	var result entity.UpdateProductInput
+func UpdateProduct() (string, entity.Products) {
+	var result entity.Products
 	var oldproductName string
-	fmt.Println("Update Product")
+	fmt.Println("\nUpdate Product")
 
-	oldproductName = getValidInput("Which product do you want to update? ")
+	oldproductName = getValidInput("Which product name do you want to update? ")
 	result.Name = getValidInput("New product name: ")
 	result.Price = getValidFloatInput("New product price: ")
 	result.Stock = getValidIntInput("New product stock: ")
@@ -204,4 +205,13 @@ func DisplayProductList(products []entity.Products) {
 	for _, product := range products {
 		fmt.Printf("ID: %d, Name: %s, Price: %.2f, Stock: %d\n", product.Product_id, product.Name, product.Price, product.Stock)
 	}
+	fmt.Println()
+}
+
+func DisplayStaffList(staffs []entity.Staff) {
+	fmt.Println("\nList of Staff:")
+	for _, staff := range staffs {
+		fmt.Printf("ID: %v, Name: %v, Email: %v, Position: %v\n", staff.StaffID, staff.Name, staff.Email, staff.Position)
+	}
+	fmt.Println()
 }

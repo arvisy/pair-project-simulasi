@@ -79,9 +79,16 @@ func main() {
 				choiceProduct = cli.GetChoiceStaf()
 				switch choiceProduct {
 				case 1:
+					staffList, err := handler.ListStaff(db)
+					if err != nil {
+						fmt.Println("Error listing products:", err)
+						return
+					}
+					cli.DisplayStaffList(staffList)
+				case 2:
 					newstaff := cli.AddStaff()
 					handler.AddStaff(db, newstaff)
-				case 2:
+				case 3:
 					innerExit = true
 				default:
 					fmt.Println("Choice unrecognized. Please select one of the options")

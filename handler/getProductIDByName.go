@@ -18,7 +18,7 @@ func GetProductIDByName(db *sql.DB, productName string) (int, error) {
 	err := db.QueryRow(query, productName).Scan(&productID)
 	if err != nil {
 		switch {
-		case errors.Is(err, ErrNotFoundRecord):
+		case errors.Is(err, sql.ErrNoRows):
 			return -1, ErrNotFoundRecord
 		default:
 			return -1, fmt.Errorf("error getting product by name: %v", err)
