@@ -92,7 +92,7 @@ func UpdateProduct() (string, entity.UpdateProductInput) {
 
 func AddProduct() entity.Products {
 	var result entity.Products
-	fmt.Println("Add product")
+	fmt.Println("\nAdd product")
 
 	result.Name = getValidInput("Product name: ")
 	result.Price = getValidFloatInput("Price: ")
@@ -166,7 +166,7 @@ func getValidIntInput(prompt string) int {
 }
 
 func DisplayProductList(products []entity.Products) {
-	fmt.Println("List of Products:")
+	fmt.Println("\nList of Products:")
 	for _, product := range products {
 		fmt.Printf("ID: %d, Name: %s, Price: %.2f, Stock: %d\n", product.Product_id, product.Name, product.Price, product.Stock)
 	}

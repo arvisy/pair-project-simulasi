@@ -25,7 +25,10 @@ func main() {
 		if exit {
 			break
 		}
+
 		cli.ShowMenu()
+
+		fmt.Print("\nYour choice: ")
 
 		scanner := bufio.NewScanner(os.Stdin)
 		scanner.Split(bufio.ScanWords)
