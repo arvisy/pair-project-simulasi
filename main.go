@@ -42,6 +42,12 @@ func main() {
 
 		switch choice {
 		case 1:
+			productList, err := handler.ListProduct(db)
+			if err != nil {
+				fmt.Println("Error listing products:", err)
+				return
+			}
+			cli.DisplayProductList(productList)
 			newProduct := cli.AddProduct()
 			handler.AddProduct(db, newProduct)
 		case 2:

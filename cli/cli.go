@@ -164,3 +164,10 @@ func getValidIntInput(prompt string) int {
 	}
 	return result
 }
+
+func DisplayProductList(products []entity.Products) {
+	fmt.Println("List of Products:")
+	for _, product := range products {
+		fmt.Printf("ID: %d, Name: %s, Price: %.2f, Stock: %d\n", product.Product_id, product.Name, product.Price, product.Stock)
+	}
+}
