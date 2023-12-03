@@ -1,6 +1,6 @@
 CREATE TABLE products (
     product_id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) UNIQUE NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     stock INT NOT NULL CHECK (stock > 0)
 );
